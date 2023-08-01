@@ -1,20 +1,53 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
+
+This is a start kit for those that will participate in Considition 2023 using Python.
+
+main.py contains an example of:
+
+- Fetching required data
+- Submitting a solution to Considition 2023
+- Scoring a solution locally and saving the "game"
+  - There will be a request limit for the Considition apis so if you wish to train a AI/ML or trying some brute force solution you'll have to use the scoring function that comes in this repo.
+  - Saved games can be visualized using the the notebook in this repo
+
+visualization.ipynb is a notebook for visualizing games.
+
+scoring.py contains the logic for how we score a solution.
+
+api.py contains methods for using the Considition apis.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+We recommended using visual studio code (https://code.visualstudio.com/Download) with the "Jupyter" extension for running the note book in this repo.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+----Running main.py-----
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+1. Install python 3.11. https://www.python.org/downloads/
+2. Navigate to the root folder of the project and create a virtual environment with required dependencies:
+
+```console
+   $ python -m venv .venv
+```
+
+3. Activate the virtual environment and run
+
+```console
+   $ pip install -r requirements.txt
+```
+
+3. Create a .env file with you api token (see .example.env).
+
+4. Run the program with
+
+```console
+   $ python .\main.py
+```
+
+----Running visualization.ipynb in vs code----
+
+1. Complete above steps
+2. Install the jupyter extension in vs code: https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter&ssr=false#review-details
+3. Select the .venv created above steps as kernel for the notebook
+4. Run the notebook
+   - enter a game id
+   - Choose to fetch game from the Considtion APP or locally from the "my_games" folder.
