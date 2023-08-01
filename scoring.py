@@ -37,7 +37,7 @@ def calculateScore(mapName, solution, mapEntity, generalData):
                 LK.footfall: loc[LK.footfall],
                 LK.f3100Count: f3_count,
                 LK.f9100Count: f9_count,
-                LK.salesVolume: getSalesVolume(loc[LK.locationType], generalData),
+                LK.salesVolume: loc[LK.salesVolume],
                 LK.salesCapacity: f3_count
                 * generalData[GK.f3100Data][GK.refillCapacityPerWeek]
                 + f9_count * generalData[GK.f9100Data][GK.refillCapacityPerWeek],
@@ -55,7 +55,7 @@ def calculateScore(mapName, solution, mapEntity, generalData):
                 CK.latitude: loc[CK.latitude],
                 CK.longitude: loc[CK.longitude],
                 LK.footfall: loc[LK.footfall],
-                LK.salesVolume: getSalesVolume(loc[LK.locationType], generalData),
+                LK.salesVolume: loc[LK.salesVolume],
             }
 
     if not scoredSolution[LK.locations]:
@@ -121,17 +121,6 @@ def calculateScore(mapName, solution, mapEntity, generalData):
     return scoredSolution
 
 
-def getSalesVolume(locationType: str, generalData: Dict) -> float | None:
-    locationType = locationType.lower()
-
-    for key in generalData[GK.locationTypes]:
-        loctype = generalData[GK.locationTypes][key]
-        if str(loctype[GK.type_]).lower() == locationType:
-            return loctype[LK.salesVolume]
-
-    return None
-
-
 def distanceBetweenPoint(lat_1, long_1, lat_2, long_2) -> int:
     R = 6371e3
     φ1 = lat_1 * math.pi / 180  #  φ, λ in radians
@@ -153,14 +142,12 @@ def distanceBetweenPoint(lat_1, long_1, lat_2, long_2) -> int:
 def distributeSales(with_, without, generalData):
     for key_without in without:
         distributeSalesTo = {}
-        locationSalesFrom = getSalesVolume(
-            without[key_without][LK.locationType], generalData
-        )
+        loc_without = without[key_without]
 
         for key_with_ in with_:
             distance = distanceBetweenPoint(
-                without[key_without][CK.latitude],
-                without[key_without][CK.longitude],
+                loc_without[CK.latitude],
+                loc_without[CK.longitude],
                 with_[key_with_][CK.latitude],
                 with_[key_with_][CK.longitude],
             )
@@ -186,7 +173,7 @@ def distributeSales(with_, without, generalData):
                     / total
                     * generalData[GK.refillDistributionRate]
                     * generalData[GK.refillSalesFactor]
-                    * locationSalesFrom
+                    * loc_without[LK.salesVolume]
                 )
 
     return with_

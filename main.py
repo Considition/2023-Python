@@ -1,6 +1,6 @@
 import os
 import json
-from scoring import getSalesVolume, calculateScore
+from scoring import calculateScore
 from api import getGeneralData, getMapData, submit
 from data_keys import (
     MapNames as MN,
@@ -32,10 +32,10 @@ def main():
     print(f"5: {MN.vasteras}")
     print(f"6: {MN.orebro}")
     print(f"7: {MN.london}")
-    option = input("Select the map you wish to play: ")
+    option_ = input("Select the map you wish to play: ")
 
     mapName = None
-    match option:
+    match option_:
         case "1":
             mapName = MN.stockholm
         case "2":
@@ -68,7 +68,7 @@ def main():
                 location = mapEntity[LK.locations][key]
                 name = location[LK.locationName]
 
-                salesVolume = getSalesVolume(location[LK.locationType], generalData)
+                salesVolume = location[LK.salesVolume]
                 if salesVolume > 100:
                     solution[LK.locations][name] = {
                         LK.f9100Count: 0,
