@@ -23,6 +23,7 @@ class LocationKeys:
     f9100Count = "freestyle9100Count"
     salesCapacity = "salesCapacity"
     leasingCost = "leasingCost"
+    revenue = "revenue"
 
 
 @dataclass
@@ -37,10 +38,9 @@ class ScoringKeys:
     mapName = "mapName"
     gameScore = "gameScore"
     totalRevenue = "totalRevenue"
-    totalLeasingCost = "totalLeasingCost"
     totalF3100Count = "totalFreestyle3100Count"
     totalF9100Count = "totalFreestyle9100Count"
-    co2Savings = "co2Savings"
+    co2Savings = "kgCo2Savings"
     totalFootfall = "totalFootfall"
     totalLeasingCost = "totalLeasingCost"
     gameScore = "gameScore"

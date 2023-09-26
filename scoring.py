@@ -37,7 +37,7 @@ def calculateScore(mapName, solution, mapEntity, generalData):
                 LK.footfall: loc[LK.footfall],
                 LK.f3100Count: f3_count,
                 LK.f9100Count: f9_count,
-                LK.salesVolume: loc[LK.salesVolume],
+                LK.salesVolume: loc[LK.salesVolume] * generalData[GK.refillSalesFactor],
                 LK.salesCapacity: f3_count
                 * generalData[GK.f3100Data][GK.refillCapacityPerWeek]
                 + f9_count * generalData[GK.f9100Data][GK.refillCapacityPerWeek],
@@ -55,7 +55,7 @@ def calculateScore(mapName, solution, mapEntity, generalData):
                 CK.latitude: loc[CK.latitude],
                 CK.longitude: loc[CK.longitude],
                 LK.footfall: loc[LK.footfall],
-                LK.salesVolume: loc[LK.salesVolume],
+                LK.salesVolume: loc[LK.salesVolume] * generalData[GK.refillSalesFactor],
             }
 
     if not scoredSolution[LK.locations]:
@@ -73,6 +73,9 @@ def calculateScore(mapName, solution, mapEntity, generalData):
         sales = loc[LK.salesVolume]
         if loc[LK.salesCapacity] < loc[LK.salesVolume]:
             sales = loc[LK.salesCapacity]
+
+        loc[LK.revenue] = sales * generalData[GK.refillUnitData][GK.profitPerUnit]
+        loc[SK.earnings] = loc[LK.revenue] - loc[LK.leasingCost]
 
         scoredSolution[SK.totalF3100Count] += scoredSolution[LK.locations][key][
             LK.f3100Count
@@ -99,8 +102,8 @@ def calculateScore(mapName, solution, mapEntity, generalData):
         ][LK.footfall]
 
     scoredSolution[SK.totalRevenue] = round(scoredSolution[SK.totalRevenue], 0)
-    scoredSolution[SK.gameScore][SK.co2Savings] = round(
-        scoredSolution[SK.gameScore][SK.co2Savings], 0
+    scoredSolution[SK.gameScore][SK.co2Savings] = (
+        round(scoredSolution[SK.gameScore][SK.co2Savings], 0) / 1000
     )
 
     scoredSolution[SK.gameScore][SK.earnings] = (
@@ -110,7 +113,6 @@ def calculateScore(mapName, solution, mapEntity, generalData):
     scoredSolution[SK.gameScore][SK.total] = round(
         (
             scoredSolution[SK.gameScore][SK.co2Savings]
-            / 1000
             * generalData[GK.co2PricePerKiloInSek]
             + scoredSolution[SK.gameScore][SK.earnings]
         )
@@ -172,7 +174,6 @@ def distributeSales(with_, without, generalData):
                     distributeSalesTo[key_temp]
                     / total
                     * generalData[GK.refillDistributionRate]
-                    * generalData[GK.refillSalesFactor]
                     * loc_without[LK.salesVolume]
                 )
 

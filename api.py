@@ -10,6 +10,7 @@ domain = os.environ["domain"]
 
 
 def getMapData(mapName):
+    print(domain)
     try:
         resp = requests.get(f"{domain}/api/Game/getMapData?mapName={mapName}")
         resp.raise_for_status()
