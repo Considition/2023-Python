@@ -103,7 +103,17 @@ def calculateScore(mapName, solution, mapEntity, generalData):
 
     scoredSolution[SK.totalRevenue] = round(scoredSolution[SK.totalRevenue], 0)
     scoredSolution[SK.gameScore][SK.co2Savings] = (
-        round(scoredSolution[SK.gameScore][SK.co2Savings], 0) / 1000
+        round(
+            scoredSolution[SK.gameScore][SK.co2Savings]
+            - scoredSolution[SK.totalF3100Count]
+            * generalData[GK.f3100Data][GK.staticCo2]
+            / 1000
+            - scoredSolution[SK.totalF9100Count]
+            * generalData[GK.f9100Data][GK.staticCo2]
+            / 1000,
+            0,
+        )
+        / 1000
     )
 
     scoredSolution[SK.gameScore][SK.earnings] = (

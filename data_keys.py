@@ -65,3 +65,4 @@ class GeneralKeys:
     type_ = "type"
     refillDistributionRate = "refillDistributionRate"
     refillSalesFactor = "refillSalesFactor"
+    staticCo2 = "staticCo2"
