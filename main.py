@@ -32,6 +32,8 @@ def main():
     print(f"5: {MN.vasteras}")
     print(f"6: {MN.orebro}")
     print(f"7: {MN.london}")
+    print(f"8: {MN.berlin}")
+    print(f"9: {MN.linkoping}")
     option_ = input("Select the map you wish to play: ")
 
     mapName = None
@@ -50,6 +52,10 @@ def main():
             mapName = MN.orebro
         case "7":
             mapName = MN.london
+        case "8":
+            mapName = MN.berlin
+        case "9":
+            mapName = MN.linkoping
         case _:
             print("Invalid choice.")
 
