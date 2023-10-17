@@ -10,6 +10,8 @@ class MapNames:
     vasteras = "vasteras"
     orebro = "orebro"
     london = "london"
+    linkoping = "linkoping"
+    berlin = "berlin"
 
 
 @dataclass

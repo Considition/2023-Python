@@ -84,9 +84,13 @@ def calculateScore(mapName, solution, mapEntity, generalData):
             LK.f9100Count
         ]
 
-        scoredSolution[SK.gameScore][SK.co2Savings] += sales * (
-            generalData[GK.classicUnitData][GK.co2PerUnitInGrams]
-            - generalData[GK.refillUnitData][GK.co2PerUnitInGrams]
+        scoredSolution[SK.gameScore][SK.co2Savings] += (
+            sales
+            * (
+                generalData[GK.classicUnitData][GK.co2PerUnitInGrams]
+                - generalData[GK.refillUnitData][GK.co2PerUnitInGrams]
+            )
+            / 1000
         )
 
         scoredSolution[SK.totalRevenue] += (
@@ -102,18 +106,15 @@ def calculateScore(mapName, solution, mapEntity, generalData):
         ][LK.footfall]
 
     scoredSolution[SK.totalRevenue] = round(scoredSolution[SK.totalRevenue], 0)
-    scoredSolution[SK.gameScore][SK.co2Savings] = (
-        round(
-            scoredSolution[SK.gameScore][SK.co2Savings]
-            - scoredSolution[SK.totalF3100Count]
-            * generalData[GK.f3100Data][GK.staticCo2]
-            / 1000
-            - scoredSolution[SK.totalF9100Count]
-            * generalData[GK.f9100Data][GK.staticCo2]
-            / 1000,
-            0,
-        )
+    scoredSolution[SK.gameScore][SK.co2Savings] = round(
+        scoredSolution[SK.gameScore][SK.co2Savings]
+        - scoredSolution[SK.totalF3100Count]
+        * generalData[GK.f3100Data][GK.staticCo2]
         / 1000
+        - scoredSolution[SK.totalF9100Count]
+        * generalData[GK.f9100Data][GK.staticCo2]
+        / 1000,
+        0,
     )
 
     scoredSolution[SK.gameScore][SK.earnings] = (
