@@ -26,13 +26,13 @@ We recommended using visual studio code (https://code.visualstudio.com/Download)
 2. Navigate to the root folder of the project and create a virtual environment with required dependencies:
 
 ```console
-   $ python -m venv .venv
+   python -m venv .venv
 ```
 
 3. Activate the virtual environment and run
 
 ```console
-   $ pip install -r requirements.txt
+   pip install -r requirements.txt
 ```
 
 3. Create a .env file with you api token (see .example.env).
@@ -40,7 +40,7 @@ We recommended using visual studio code (https://code.visualstudio.com/Download)
 4. Run the program with
 
 ```console
-   $ python .\main.py
+   python .\main.py
 ```
 
 ----Running visualization.ipynb in vs code----
