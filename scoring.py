@@ -47,7 +47,9 @@ def calculateScore(mapName, solution, mapEntity, generalData):
             }
 
             if scoredSolution[LK.locations][key][LK.salesCapacity] <= 0:
-                raise SystemExit("Error: Failed to fetch general game data")
+                raise SystemExit(
+                    f"You are not allowed to submit locations with no refill stations. Remove or alter location: {scoredSolution[LK.locations][key][LK.locationName]}"
+                )
         else:
             locationListNoRefillStation[key] = {
                 LK.locationName: loc[LK.locationName],
