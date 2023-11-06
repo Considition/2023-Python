@@ -9,10 +9,13 @@ load_dotenv()
 domain = os.environ["domain"]
 
 
-def getMapData(mapName):
+def getMapData(mapName, apiKey):
     print(domain)
     try:
-        resp = requests.get(f"{domain}/api/Game/getMapData?mapName={mapName}")
+        resp = requests.get(
+            f"{domain}/api/Game/getMapData?mapName={mapName}",
+            headers={"x-api-key": apiKey},
+        )
         resp.raise_for_status()
     except:
         print(resp)
