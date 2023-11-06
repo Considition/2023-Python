@@ -61,7 +61,7 @@ def main():
 
     if mapName:
         ##Get map data from Considition endpoint
-        mapEntity = getMapData(mapName)
+        mapEntity = getMapData(mapName, apiKey)
         ##Get non map specific data from Considition endpoint
         generalData = getGeneralData()
 
