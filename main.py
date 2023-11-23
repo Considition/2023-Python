@@ -90,8 +90,8 @@ def main():
                             LK.f3100Count: 0,
                         }
             else:
-                hotspot1 = mapEntity[HK.hotspots][0]
-                hotspot2 = mapEntity[HK.hotspots][1]
+                hotspot1 = mapEntity[HK.hotspots][1]
+                hotspot2 = mapEntity[HK.hotspots][2]
 
                 solution[LK.locations]["location1"] = {
                     LK.f9100Count: 1,
